@@ -1,0 +1,86 @@
+:root{
+  --asfalto:#1c1a22; --papel:#f2efe6; --cian:#2ee6d6; --magenta:#ff3d81;
+  --amarillo:#ffd23f; --verde:#7dff6a;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#0e0d12;color:var(--papel);font-family:'Rubik',system-ui,sans-serif}
+#app{position:fixed;inset:0;background:var(--asfalto);overflow:hidden}
+#stage{position:absolute;inset:0;width:100%;height:100%}
+
+.screen{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;padding:4%;text-align:center;background:rgba(18,16,24,.82)}
+.screen.active{display:flex}
+/* Fondo de menús: Menú principal, Selector de nivel, Créditos y Admin.
+   Cambia la imagen en UN solo lugar: la variable --fondo. */
+:root{--fondo:url('assets/menu_bg.jpg')}
+#menu,#songs,#credits,#admin{background-position:center;background-size:cover;background-repeat:no-repeat}
+#menu{
+  background-image:
+    radial-gradient(ellipse at center, rgba(10,8,14,.65) 0%, rgba(10,8,14,.25) 60%, rgba(10,8,14,.55) 100%),
+    var(--fondo);
+  background-color:rgba(18,16,24,.55);
+}
+/* En pantallas con más texto el degradado es más oscuro para que se lea bien */
+#songs,#credits,#admin{
+  background-image:linear-gradient(rgba(10,8,14,.72),rgba(10,8,14,.72)),var(--fondo);
+  background-color:rgba(18,16,24,.9);
+}
+#songs h2,#credits h2,#admin h2,#songs .text,#credits .text,#admin .text,#status,#adminStatus{text-shadow:0 2px 6px #000,0 0 14px rgba(0,0,0,.9)}
+#menu .sub,#menu .hint{text-shadow:0 2px 6px #000,0 0 14px rgba(0,0,0,.9);opacity:1}
+#menu h1{text-shadow:4px 4px 0 var(--magenta),0 8px 24px rgba(0,0,0,.85)}
+#menu button{box-shadow:0 4px 14px rgba(0,0,0,.6);text-shadow:0 1px 3px rgba(0,0,0,.7)}
+h1,h2{font-family:'Permanent Marker',cursive;font-weight:400;line-height:1}
+h1{font-size:clamp(3rem,10vw,7rem);color:var(--amarillo);transform:rotate(-3deg);text-shadow:4px 4px 0 var(--magenta)}
+h2{font-size:clamp(1.8rem,4vw,3rem);color:var(--cian)}
+.sub,.hint{opacity:.8}
+.hint{font-size:.85rem}
+.text{max-width:60ch;line-height:1.5}
+
+.btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+button,.file{font:600 1rem 'Rubik',sans-serif;padding:.7rem 1.6rem;border:3px solid var(--papel);background:var(--magenta);color:var(--papel);cursor:pointer;border-radius:4px}
+button.alt,.file{background:transparent}
+button:hover,.file:hover{background:var(--amarillo);color:var(--asfalto);border-color:var(--amarillo)}
+button:focus-visible,.file:focus-within{outline:3px solid var(--cian);outline-offset:3px}
+.file input{position:absolute;opacity:0;width:1px;height:1px}
+
+#songList{list-style:none;display:flex;flex-direction:column;gap:.6rem;width:min(520px,90%);padding:0}
+#songList button{width:100%;text-align:left;display:flex;flex-direction:column;gap:.15rem}
+#songList small{font-weight:400;opacity:.8}
+#status{min-height:1.4em;color:var(--amarillo);font-size:.9rem}
+
+#hud{position:absolute;inset:0;pointer-events:none}
+#hud[hidden]{display:none}
+#hudScore{position:absolute;top:2%;left:3%;font:1.6rem 'Permanent Marker',cursive;color:var(--amarillo)}
+#hudCombo{position:absolute;top:10%;left:3%;font-size:1rem;opacity:.85}
+#hudJudge{position:absolute;top:36%;left:50%;transform:translateX(-50%);font:2.2rem 'Permanent Marker',cursive;color:var(--cian);text-shadow:2px 2px 0 #000}
+#health{position:absolute;top:3%;right:3%;width:28%;height:14px;border:3px solid var(--papel);border-radius:8px;overflow:hidden;background:#000}
+#healthBar{display:block;height:100%;width:50%;background:var(--verde);transition:width .15s}
+
+#resList{display:grid;grid-template-columns:auto auto;gap:.4rem 2rem;text-align:left;font-size:1.1rem}
+#resList dd{font-weight:600;color:var(--amarillo)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Rango final */
+#resRank{font:clamp(4rem,16vh,9rem)/1 'Permanent Marker',cursive;color:var(--papel);text-shadow:4px 4px 0 var(--magenta)}
+#resRank[data-rank=S]{color:var(--amarillo)}
+#resRank[data-rank=A]{color:var(--verde)}
+#resRank[data-rank=B]{color:var(--cian)}
+#resRank[data-rank=F]{color:var(--magenta)}
+
+/* Interfaz adaptable */
+.screen{overflow-y:auto;gap:clamp(.5rem,2vh,1.2rem);padding:clamp(.8rem,4vh,3rem)}
+button,.file{font-size:clamp(.85rem,2.2vh,1.05rem);min-height:44px}
+#hudScore{font-size:clamp(1.1rem,4vh,1.8rem)}
+#hudJudge{font-size:clamp(1.4rem,6vh,2.6rem);top:30%}
+#resList{font-size:clamp(.85rem,2.4vh,1.1rem);gap:.3rem 1.5rem}
+@media (max-height:480px){h1{font-size:2.6rem}.sub,.hint{display:none}}
+@media (max-width:600px){#health{width:40%}}
+#stage{touch-action:none;user-select:none}
+
+/* Menú admin */
+#adminList{list-style:none;padding:0;width:min(680px,92%);display:flex;flex-direction:column;gap:.7rem}
+#adminList li{border:3px solid var(--papel);border-radius:4px;padding:.6rem .9rem;text-align:left;display:flex;flex-wrap:wrap;gap:.6rem;justify-content:space-between;align-items:center}
+.arow{display:flex;flex-direction:column}.arow small{opacity:.8}
+.abtns{display:flex;gap:.4rem;flex-wrap:wrap}
+.abtns button{padding:.4rem .9rem;min-height:40px}
+#adminStatus{min-height:1.4em;color:var(--amarillo);font-size:.9rem;max-width:60ch}

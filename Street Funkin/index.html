@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Street Funkin · Daske Gaitán</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app">
+  <canvas id="stage"></canvas>
+
+  <!-- Menú principal -->
+  <section class="screen active" id="menu">
+    <h1>Street<br>Funkin</h1>
+    <p class="sub">Un juego de ritmo sobre el arte de Daske Gaitán</p>
+    <div class="btns">
+      <button data-go="songs">Jugar</button>
+      <button data-go="credits" class="alt">Créditos</button>
+    </div>
+    <p class="hint">Controles: flechas o W A S D · Esc para pausar</p>
+  </section>
+
+  <!-- Selector de canciones -->
+  <section class="screen" id="songs">
+    <h2>Elige una canción</h2>
+    <ul id="songList"></ul>
+    <label class="file">Cargar audio propio (mp3, wav, ogg)
+      <input type="file" id="fileInput" accept="audio/*">
+    </label>
+    <p id="status" role="status"></p>
+    <button data-go="menu" class="alt">Volver</button>
+  </section>
+
+  <!-- HUD -->
+  <div id="hud" hidden>
+    <span id="hudScore">0</span>
+    <span id="hudCombo"></span>
+    <span id="hudJudge"></span>
+    <div id="health"><i id="healthBar"></i></div>
+  </div>
+
+  <!-- Pausa -->
+  <section class="screen" id="pause">
+    <h2>Pausa</h2>
+    <div class="btns">
+      <button id="btnResume">Continuar</button>
+      <button id="btnRestart" class="alt">Reiniciar</button>
+      <button id="btnQuit" class="alt">Salir al selector</button>
+    </div>
+  </section>
+
+  <!-- Resultados -->
+  <section class="screen" id="results">
+    <h2 id="resTitle">Resultados</h2>
+    <div id="resRank">-</div>
+    <dl id="resList"></dl>
+    <div class="btns">
+      <button id="btnAgain">Jugar de nuevo</button>
+      <button data-go="songs" class="alt">Otras canciones</button>
+    </div>
+  </section>
+
+  <!-- Menú admin (grabar patrones) -->
+  <section class="screen" id="admin">
+    <h2>Menú Admin</h2>
+    <p class="text">Graba el patrón de cada nivel tocando las teclas con la música. Mantén una tecla más de 0.4 s para crear una nota sostenida.</p>
+    <ul id="adminList"></ul>
+    <p id="adminStatus" role="status"></p>
+    <button data-go="credits" class="alt">Volver</button>
+  </section>
+
+  <!-- Créditos -->
+  <section class="screen" id="credits">
+    <h2>Sobre Daske Gaitán</h2>
+    <p class="text">Aquí va la biografía breve del artista y su trayectoria en el arte urbano.</p>
+    <p class="text">Aquí va la información del documental: título, autor, institución y año.</p>
+    <p class="text">Música: Daske Gaitán. Programación y diseño: (tu nombre).</p>
+    <div class="btns">
+      <button data-go="menu" class="alt">Volver</button>
+      <button id="btnAdmin" class="alt">Admin</button>
+    </div>
+  </section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
